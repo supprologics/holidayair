@@ -17,4 +17,9 @@ class Country extends Model
     public function tours(){
         return $this->hasMany(Tour::class);
     }
+
+    
+    public function airlines(){
+        return $this->hasMany(Airline::class);
+    }
 }

@@ -387,13 +387,13 @@
                                 <h6 class="overline-title text-primary-alt">Blog Department</h6>
                             </li><!-- .nk-menu-heading -->
                             <li class="nk-menu-item has-sub">
-                                <a href="html/index-invest.html" class="nk-menu-link">
+                                <a href="{{ route('blogs.index') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-template"></em></span>
                                     <span class="nk-menu-text">Blogs Manage</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item has-sub">
-                                <a href="html/index-invest.html" class="nk-menu-link">
+                                <a href="{{ route('blogcategories.index') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-menu-alt"></em></span>
                                     <span class="nk-menu-text">Blog Categories</span>
                                 </a>
@@ -408,21 +408,27 @@
                                 <h6 class="overline-title text-primary-alt">Flight Department</h6>
                             </li><!-- .nk-menu-heading -->
                             <li class="nk-menu-item has-sub">
-                                <a href="html/index-invest.html" class="nk-menu-link">
+                                <a href="{{ route('deals.index') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-send"></em></span>
-                                    <span class="nk-menu-text">Flight Manage</span>
+                                    <span class="nk-menu-text">Deals Manage</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item has-sub">
-                                <a href="html/index-invest.html" class="nk-menu-link">
+                                <a href="{{ route('tickets.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-send"></em></span>
+                                    <span class="nk-menu-text">Ticket Manage</span>
+                                </a>
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-item has-sub">
+                                <a href="{{ route('flightticketcategories.index') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-menu-alt"></em></span>
-                                    <span class="nk-menu-text">Flight Categories</span>
+                                    <span class="nk-menu-text">Flight Ticket Categories</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item has-sub">
-                                <a href="html/index-invest.html" class="nk-menu-link">
+                                <a href="{{ route('airlines.index') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-globe"></em></span>
-                                    <span class="nk-menu-text">Flight Countries</span>
+                                    <span class="nk-menu-text">Airline Manage</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-heading">

@@ -11,7 +11,7 @@
                     <div class="nk-block-between g-3">
                 
                         <div class="nk-block-head-content">
-                            <h2 class="nk-block-title page-title">Images for {{$tour->name}}</h2>
+                            <h2 class="nk-block-title page-title">Images for {{$deal->name}}</h2>
                             <div class="nk-block-des text-soft">
                             </div>
                         </div>
@@ -50,15 +50,15 @@
                 <div class="nk-block">
                     <ul class="nk-block-tools g-3">
                         <li class="nk-block-tools-opt">
-                            <a href="{{ route('sethints' ,$tour->id) }}" class="btn btn-primary">
+                            <a href="{{ route('setdealrule',$deal->id) }}" class="btn btn-primary">
                                 <em class="icon ni ni-arrow-left"></em>
                                 <span>Previous</span>
                             </a>
                         </li>
                         <li class="nk-block-tools-opt">
-                            <a href="{{ route('route.index',$tour->id) }}" class="btn btn-primary">
-                                <em class="icon ni ni-arrow-right"></em>
-                                <span>Next</span>
+                            <a href="{{ route('deals.index') }}" class="btn btn-primary">
+                                <em class="icon ni ni-save"></em>
+                                <span>Save</span>
                             </a>
                         </li>
                     </ul>
@@ -82,8 +82,8 @@
                             <div class="dz-message" data-dz-message>
                                 <span class="dz-message-text"><span>Drag and drop</span> file here or <span>browse</span></span>
                             </div>
-                            <input type="hidden" name="id_type" value="{{ $tour->id }}">
-                            <input type="hidden" name="type" value="tours">
+                            <input type="hidden" name="id_type" value="{{ $deal->id }}">
+                            <input type="hidden" name="type" value="deal">
                           </form>
                     </div>
                     <div class="nk-modal-action justify-end">
@@ -105,7 +105,7 @@
     <script src="{{ asset('admin-assets/js/apps/file-manager.js?ver=2.0.0')}}"></script>
 
     <script type="text/javascript">
-        var tour_id = "{{ $tour->id }}";
+        var deal_id = "{{ $deal->id }}";
    
         Dropzone.options.dropzoneForm = {
             autoProcessQueue : false,
@@ -140,8 +140,8 @@
           $.ajax({
             url:"{{ route('dropzone.fetch') }}",
             data:{
-                'id_type':tour_id,
-                'type':'tours',
+                'id_type':deal_id,
+                'type':'deal',
             },
             success:function(data)
             {
@@ -149,21 +149,22 @@
             }
           })
         }
-      
+
         $(document).on('click', '.remove_image', function(){
           var name = $(this).attr('id');
-          console.log(name);
           $.ajax({
             url:"{{ route('dropzone.delete') }}",
             data:{
                 'name' : name,
-                'type':'tours',
+                'type':'deal',
             },
             success:function(data){
               load_images();
             }
           })
         });
+      
+
       
     </script>
 @endsection

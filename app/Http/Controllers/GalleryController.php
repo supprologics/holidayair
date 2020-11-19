@@ -5,31 +5,69 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tour;
 use App\Gallery;
+use App\Deal;
+use App\FlightDealGallery;
+use App\Blog;
+use App\BlogGallery;
 
 class GalleryController extends Controller
 {
-
 
     public function galleryview(Tour $tour)
     {
         return view('admin.gallery.index')->with('tour',$tour)->with('gallery',Gallery::all()->where('tour_id',$tour->id));
     }
 
+    public function dealgalleryview(Deal $deal)
+    {
+        return view('admin.deals.gallery')->with('deal',$deal)->with('gallery',FlightDealGallery::all()->where('deal_id',$deal->id));
+    }
+
+    public function bloggalleryview(Blog $blog)
+    {
+        return view('admin.blogs.gallery')->with('blog',$blog)->with('gallery',BlogGallery::all()->where('post_id',$blog->id));
+    }
+
     function upload(Request $request)
     {
+        
         $image = $request->file('file');
         $imageName = uniqid().time() . '.' . $image->extension();
-        $image->move(public_path('images/tours'), $imageName);
-        Gallery::create([
-            'file_path'=>$imageName,
-            'tour_id'=>$request->tour_id,
-        ]);
+        $image->move(public_path('images/'.$request->type), $imageName);
+        
+        if($request->type=='deal'){
+            FlightDealGallery::create([
+                'file_path'=>$imageName,
+                'deal_id'=>$request->id_type,
+            ]);
+        }
+        if($request->type=='tours'){
+            Gallery::create([
+                'file_path'=>$imageName,
+                'tour_id'=>$request->id_type,
+            ]);
+        }
+        if($request->type=='blog'){
+            BlogGallery::create([
+                'file_path'=>$imageName,
+                'post_id'=>$request->id_type,
+            ]);
+        }
         return response()->json(['success' => $imageName]);
     }
 
     function fetch(Request $request)
     {
-        $gallery=Gallery::all()->where('tour_id',$request->tour_id);
+        if($request->type=='deal'){
+            $gallery=FlightDealGallery::all()->where('deal_id',$request->id_type);
+        }
+        if($request->type=='tours'){
+            $gallery=Gallery::all()->where('tour_id',$request->id_type);
+        }
+        if($request->type=='blog'){
+            $gallery=BlogGallery::all()->where('post_id',$request->id_type);
+        }
+
         $output = '<div class="row">';
         foreach($gallery as $image)
             {
@@ -37,7 +75,7 @@ class GalleryController extends Controller
             <div class="col-md-3">
                 <div class="card mb-4" >
                     <div class="view overlay">
-                    <img class="card-img-top" src="'.asset('images/tours/' . $image->file_path).'"
+                    <img class="card-img-top" src="'.asset('images/'.$request->type.'/' . $image->file_path).'"
                     alt="Card image cap" style="width:400px; height:250px">
                     <div class="mask rgba-white-slight "></div>
                     </div>
@@ -55,11 +93,19 @@ class GalleryController extends Controller
 
     function delete(Request $request)
     {
-        if($request->get('name'))
-        {
             $del_id=$request->name;
-            Gallery::where('file_path', $del_id)->delete();
-            \File::delete(public_path('images/tours/' . $request->get('name')));
+            if($request->get('name'))
+            {
+            if($request->type=='deal'){
+                FlightDealGallery::where('file_path', $del_id)->delete();
+            }
+            if($request->type=='tours'){
+                Gallery::where('file_path', $del_id)->delete();
+            }
+            if($request->type=='blog'){
+                BlogGallery::where('file_path', $del_id)->delete();
+            }
+            \File::delete(public_path('images/'.$request->type.'/' . $request->get('name')));
         }
     }
 

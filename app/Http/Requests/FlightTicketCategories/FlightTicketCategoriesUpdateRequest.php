@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Categories;
+namespace App\Http\Requests\FlightTicketCategories;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoriesUpdateRequest extends FormRequest
+class FlightTicketCategoriesUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

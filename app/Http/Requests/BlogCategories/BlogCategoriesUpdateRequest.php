@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Categories;
+namespace App\Http\Requests\BlogCategories;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoriesUpdateRequest extends FormRequest
+class BlogCategoriesUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

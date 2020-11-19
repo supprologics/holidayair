@@ -146,7 +146,7 @@ class ToursController extends Controller
      */
     public function destroy(Tour $tour)
     {
-        $tour->delete;
+        $tour->delete();
 
         session()->flash('success','Tour Deleted');
         return redirect(route('tours.index'));

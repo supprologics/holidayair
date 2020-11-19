@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Categories;
+namespace App\Http\Requests\Blogs;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoriesUpdateRequest extends FormRequest
+class BlogsCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class CategoriesUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required'
+            'blog_category_id'=>'required',
+            'name'=>'required|unique:blogs',
+            'description_short'=>'required',
+            'description_full'=>'required',
         ];
     }
 }

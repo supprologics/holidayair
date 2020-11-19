@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Categories;
+namespace App\Http\Requests\Airlines;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoriesUpdateRequest extends FormRequest
+class AirlinesCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class CategoriesUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required'
+            'code'=>'required|unique:airlines',
+            'country_id'=>'required',
+            'name'=>'required',
+            'logo'=>'required|image',
         ];
     }
 }

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Country;
-use App\Http\Requests\Countries\CountriesCreateRequest;
-use App\Http\Requests\Countries\CountriesUpdateRequest;
+use App\BlogCategory;
+use App\Http\Requests\BlogCategories\BlogCategoriesCreateRequest;
+use App\Http\Requests\BlogCategories\BlogCategoriesUpdateRequest;
 
-class CountriesController extends Controller
+class BlogCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,8 @@ class CountriesController extends Controller
      */
     public function index()
     {
-        return view('admin.countries.index')->with('countries',Country::paginate(5));
+        return view('admin.blog_categories.index')->with('blog_categories',BlogCategory::all());
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -26,7 +25,7 @@ class CountriesController extends Controller
      */
     public function create()
     {
-        return view('admin.countries.create');
+        return view('admin.blog_categories.create');
     }
 
     /**
@@ -35,15 +34,14 @@ class CountriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CountriesCreateRequest $request)
+    public function store(BlogCategoriesCreateRequest $request)
     {
-        Country::create([
-            'code'=>$request->code,
+        BlogCategory::create([
             'name'=>$request->name,
         ]);
 
-        session()->flash('success','New country added');
-        return redirect(route('countries.index'));
+        session()->flash('success','New blog category added');
+        return redirect(route('blogcategories.index'));
     }
 
     /**
@@ -63,9 +61,9 @@ class CountriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Country $country)
+    public function edit(BlogCategory $blogcategory)
     {
-        return view('admin.countries.create')->with('country',$country);
+        return view('admin.blog_categories.create')->with('blog_category',$blogcategory);
     }
 
     /**
@@ -75,15 +73,14 @@ class CountriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CountriesUpdateRequest $request,Country $country)
+    public function update(BlogCategoriesUpdateRequest $request,BlogCategory $blogcategory)
     {
-        $country->update([
+        $blogcategory->update([
             'name'=>$request->name,
-            'code'=>$request->code,
         ]);
 
-        session()->flash('success','Country Updated');
-        return redirect(route('countries.index'));
+        session()->flash('success','Blog Category Updated');
+        return redirect(route('blogcategories.index'));
     }
 
     /**
@@ -92,11 +89,11 @@ class CountriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Country $country)
+    public function destroy(BlogCategory $blogcategory)
     {
-        $country->delete();
-        
-        session()->flash('success','Country Deleted');
-        return redirect(route('countries.index'));
+        $blogcategory->delete();
+
+        session()->flash('success','Blog Category Deleted');
+        return redirect(route('blogcategories.index'));
     }
 }
