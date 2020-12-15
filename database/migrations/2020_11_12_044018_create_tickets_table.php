@@ -16,7 +16,7 @@ class CreateTicketsTable extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('airline_id');
-            $table->integer('flight_ticket_category_id');
+            $table->integer('flightticketscategory_id');
             $table->string('name');
             $table->decimal('amount',10,2);
             $table->string('flight_type');

@@ -34,4 +34,8 @@ class Tour extends Model
     public function routes(){
         return $this->hasMany(Route::class);
     }
+
+    public function bookings(){
+        return $this->hasMany(BookTour::class);
+    }
 }

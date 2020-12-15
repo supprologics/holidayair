@@ -10,7 +10,7 @@ class BlogCategory extends Model
         'name',
     ];
 
-    public function tours(){
+    public function posts(){
         return $this->hasMany(Blog::class);
     }
 }

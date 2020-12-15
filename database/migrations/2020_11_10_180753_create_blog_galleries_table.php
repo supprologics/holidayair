@@ -16,7 +16,7 @@ class CreateBlogGalleriesTable extends Migration
         Schema::create('blog_galleries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('file_path');
-            $table->integer('post_id');
+            $table->integer('blog_id');
             $table->timestamps();
         });
     }

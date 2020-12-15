@@ -57,7 +57,7 @@
                                             <span>{{ $ticket->airline->name }}</span>
                                         </td>
                                         <td class="nk-tb-col tb-col-md">
-                                            <span></span>
+                                            <span>{{ $ticket->flightticketscategory->name }}</span>
                                         </td>
                                         <td class="nk-tb-col tb-col-md">
                                             <span>{{ $ticket->amount }}</span>

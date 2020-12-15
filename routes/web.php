@@ -11,9 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'SiteController@index')->name('site');
+Route::get('/about', 'SiteController@about')->name('about');
+Route::get('/contact', 'SiteController@contact')->name('contact');
+Route::get('/tour', 'SiteController@tours')->name('tour');
+Route::get('/tour/{tour}', 'SiteController@tourview')->name('tourview');
+Route::get('/blog', 'SiteController@blog')->name('blog');
+Route::get('/blog/{blog}', 'SiteController@blogview')->name('blogview');
+Route::get('/flight', 'SiteController@flight')->name('flight');
+Route::get('/flight/{deal}', 'SiteController@flightview')->name('flightview');
+Route::get('/hotel', 'SiteController@hotel')->name('hotel');
+Route::get('/hotel/{hotel}', 'SiteController@hotelview')->name('hotelview');
+Route::post('/search-tour', 'SiteController@searchtour')->name('search.tour');
+Route::get('/booking-tour/{tour}', 'BookingController@bookingtour')->name('booking.tour');
+Route::post('/booktour', 'BookingController@booktour')->name('booktour');
 
 Auth::routes();
 
@@ -92,4 +103,32 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('dealgalleryview/{deal}','GalleryController@dealgalleryview')->name('dealgalleryview');
 
+    //hotels
+    
+    Route::resource('hotelcategories','HotelCategoryController');
+
+    Route::get('amenities','AmenitiesController@index')->name('amenities.index');
+    #itinerary ajax routes
+    Route::post('addamenitie','AmenitiesController@addamenitie')->name('addamenitie');
+    Route::post('editamenitie','AmenitiesController@editamenitie')->name('editamenitie');
+    Route::post('deleteamenitie','AmenitiesController@deleteamenitie')->name('deleteamenitie');
+    
+    Route::resource('hotels','HotelsController');
+    Route::get('published/{hotel}','HotelsController@published')->name('hotels.published');
+    Route::get('draft/{hotel}','HotelsController@draft')->name('hotels.draft');
+    Route::get('travelerchoice/{hotel}','HotelsController@travelerchoice')->name('hotels.travelerchoice');
+    Route::get('recommended/{hotel}','HotelsController@recommended')->name('hotels.recommended');
+    
+    Route::get('hotelamenities/{hotel}','HotelAmenitiesController@index')->name('hotelamenities.index');
+    Route::post('addhotelamenitie','HotelAmenitiesController@addhotelamenitie')->name('addhotelamenitie');
+    Route::post('deletehotelamenitie','HotelAmenitiesController@deletehotelamenitie')->name('deletehotelamenitie');
+
+    Route::get('hotelgalleryview/{hotel}','GalleryController@hotelgalleryview')->name('hotelgalleryview');
+    Route::resource('rooms','RoomsController');
+    Route::get('setrooms/{hotel}','RoomsController@setrooms')->name('rooms.setrooms');
+    Route::get('publishedroom/{room}','RoomsController@publishedroom')->name('rooms.publishedroom');
+    Route::get('draftroom/{room}','RoomsController@draftroom')->name('rooms.draftroom');
+    Route::get('bestroom/{room}','RoomsController@bestroom')->name('rooms.bestroom');
+    Route::get('createrooom/{hotel}','RoomsController@createrooom')->name('rooms.createrooom');
 });
+

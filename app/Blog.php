@@ -24,6 +24,6 @@ class Blog extends Model
     }
 
     public function gallery(){
-        return $this->hasMany(PostGallery::class);
+        return $this->hasMany(BlogGallery::class);
     }
 }

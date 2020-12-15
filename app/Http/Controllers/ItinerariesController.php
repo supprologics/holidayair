@@ -40,7 +40,6 @@ class ItinerariesController extends Controller
         $rules = array(
             'title' => 'required',
             'tour_id' => 'required',
-            'description' => 'required',
           );
 
         $validator = Validator::make ( $request->all(), $rules);

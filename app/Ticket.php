@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable=[
-        'airline_id','flight_ticket_category_id','name','amount','flight_type'
+        'airline_id','flightticketscategory_id','name','amount','flight_type'
     ];
 
     public function airline()

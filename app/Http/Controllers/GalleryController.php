@@ -9,6 +9,9 @@ use App\Deal;
 use App\FlightDealGallery;
 use App\Blog;
 use App\BlogGallery;
+use App\Room;
+use App\Hotel;
+use App\HotelGallery;
 
 class GalleryController extends Controller
 {
@@ -25,7 +28,12 @@ class GalleryController extends Controller
 
     public function bloggalleryview(Blog $blog)
     {
-        return view('admin.blogs.gallery')->with('blog',$blog)->with('gallery',BlogGallery::all()->where('post_id',$blog->id));
+        return view('admin.blogs.gallery')->with('blog',$blog)->with('gallery',BlogGallery::all()->where('blog_id',$blog->id));
+    }
+
+    public function hotelgalleryview(Hotel $hotel)
+    {
+        return view('admin.hotels.gallery')->with('hotel',$hotel)->with('gallery',HotelGallery::all()->where('hotel_id',$hotel->id));
     }
 
     function upload(Request $request)
@@ -50,7 +58,13 @@ class GalleryController extends Controller
         if($request->type=='blog'){
             BlogGallery::create([
                 'file_path'=>$imageName,
-                'post_id'=>$request->id_type,
+                'blog_id'=>$request->id_type,
+            ]);
+        }
+        if($request->type=='hotel'){
+            HotelGallery::create([
+                'file_path'=>$imageName,
+                'hotel_id'=>$request->id_type,
             ]);
         }
         return response()->json(['success' => $imageName]);
@@ -65,7 +79,10 @@ class GalleryController extends Controller
             $gallery=Gallery::all()->where('tour_id',$request->id_type);
         }
         if($request->type=='blog'){
-            $gallery=BlogGallery::all()->where('post_id',$request->id_type);
+            $gallery=BlogGallery::all()->where('blog_id',$request->id_type);
+        }
+        if($request->type=='hotel'){
+            $gallery=HotelGallery::all()->where('hotel_id',$request->id_type);
         }
 
         $output = '<div class="row">';
@@ -104,6 +121,9 @@ class GalleryController extends Controller
             }
             if($request->type=='blog'){
                 BlogGallery::where('file_path', $del_id)->delete();
+            }
+            if($request->type=='hotel'){
+                HotelGallery::where('file_path', $del_id)->delete();
             }
             \File::delete(public_path('images/'.$request->type.'/' . $request->get('name')));
         }

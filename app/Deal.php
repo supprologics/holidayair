@@ -30,4 +30,9 @@ class Deal extends Model
     {
         return $this->hasMany(DealRule::class);
     }
+
+    public function gallery()
+    {
+        return $this->hasMany(FlightDealGallery::class);
+    }
 }

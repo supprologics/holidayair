@@ -42,7 +42,7 @@ class TicketsController extends Controller
     {
         Ticket::create([
             'airline_id'=>$request->airline_id,
-            'flight_ticket_category_id'=>$request->flight_ticket_category_id,
+            'flightticketscategory_id'=>$request->flight_ticket_category_id,
             'name'=>$request->name,
             'amount'=>$request->amount,
             'flight_type'=>$request->flight_type,
@@ -85,7 +85,7 @@ class TicketsController extends Controller
     {
         $ticket->Update([
             'airline_id'=>$request->airline_id,
-            'flight_ticket_category_id'=>$request->flight_ticket_category_id,
+            'flightticketscategory_id'=>$request->flight_ticket_category_id,
             'name'=>$request->name,
             'amount'=>$request->amount,
             'flight_type'=>$request->flight_type,

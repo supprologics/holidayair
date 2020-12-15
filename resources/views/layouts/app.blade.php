@@ -435,27 +435,21 @@
                                 <h6 class="overline-title text-primary-alt">Hotel Department</h6>
                             </li><!-- .nk-menu-heading -->
                             <li class="nk-menu-item">
-                                <a href="html/components/misc/toastr.html" class="nk-menu-link">
+                                <a href="{{ route('hotels.index') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
                                     <span class="nk-menu-text">Hotel Manage</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item">
-                                <a href="html/components/misc/sweet-alert.html" class="nk-menu-link">
+                                <a href="{{ route('hotelcategories.index') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-menu-alt"></em></span>
                                     <span class="nk-menu-text">Hotel Categories</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item">
-                                <a href="html/email-templates.html" class="nk-menu-link">
+                                <a href="{{ route('amenities.index') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-globe"></em></em></span>
-                                    <span class="nk-menu-text">Hotel Countries</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item">
-                                <a href="html/email-templates.html" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-map-pin"></em></span>
-                                    <span class="nk-menu-text">Hotel Areas</span>
+                                    <span class="nk-menu-text">Hotel Amenities</span>
                                 </a>
                             </li>
                         </ul><!-- .nk-menu -->
