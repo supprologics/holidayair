@@ -265,9 +265,9 @@
                             </a>
                         </li>
                         <li class="nk-block-tools-opt">
-                            <a href="{{ route('tours.active',$tour->id) }}" class="btn btn-primary">
+                            <a href="{{ route('tours.draft',$tour->id) }}" class="btn btn-primary">
                                 <em class="icon ni ni-list-check"></em>
-                                <span>Keep as Active Tour</span>
+                                <span>Save as Draft</span>
                             </a>
                         </li>
                         <li class="nk-block-tools-opt">

@@ -87,12 +87,18 @@
                                         <td class="nk-tb-col nk-tb-col-tools">
                                             <ul class="nk-tb-actions gx-1">
                                                 <li class="nk-tb-action-hidden">
-                                                    <a href="{{ route('hotels.published',$hotel->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Published">
-                                                        <em class="icon ni ni-cross-fill-c"></em>
+                                                    <form action="{{ route('hotels.status',$hotel->id) }}" method="post">
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Toggle Status"><em class="icon ni ni-repeat"></em></button>
+                                                    </form>
+                                                </li>
+                                                <li class="nk-tb-action-hidden">
+                                                    <a href="{{ route('hotels.travelerchoice',$hotel->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Traveler choice">
+                                                        <em class="icon ni ni-star"></em>
                                                     </a>
                                                 </li>
                                                 <li class="nk-tb-action-hidden">
-                                                    <a href="{{ route('hotels.draft',$hotel->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Draft">
+                                                    <a href="{{ route('hotels.recommended',$hotel->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Recommended">
                                                         <em class="icon ni ni-list-check"></em>
                                                     </a>
                                                 </li>
@@ -101,15 +107,12 @@
                                                         <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                         <div class="dropdown-menu dropdown-menu-right">
                                                             <ul class="link-list-opt no-bdr">
-                                                                <li><a href="{{ route('hotels.travelerchoice', $hotel->id) }}"><em class="icon ni ni-light"></em><span>Travelers Choice</span></a></li>
-                                                                <li><a href="{{ route('hotels.recommended', $hotel->id) }}"><em class="icon ni ni-light"></em><span>Recommended</span></a></li>
-                                                                <li class="divider"></li>
-                                                                <li><a href="{{ route('hotelamenities.index',$hotel->id) }}"><em class="icon ni ni-repeat"></em><span>Amenities</span></a></li>
+                                                                <li><a href="{{ route('hotelamenities.index',$hotel->id) }}"><em class="icon ni ni-grid-add-c"></em><span>Amenities</span></a></li>
                                                                 <li><a href="{{ route('hotelgalleryview', $hotel->id) }}"><em class="icon ni ni-img"></em><span>Gallery</span></a></li>
-                                                                <li><a href="{{ route('rooms.setrooms',$hotel->id) }}"><em class="icon ni ni-repeat"></em><span>Rooms</span></a></li>
+                                                                <li><a href="{{ route('rooms.setrooms',$hotel->id) }}"><em class="icon ni ni-bag"></em><span>Rooms</span></a></li>
                                                                 <li class="divider"></li>
-                                                                <li><a href="{{ route('hotels.edit', $hotel->id) }}"><em class="icon ni ni-light"></em><span>Hotel Full View</span></a></li>
-                                                                <li><a role="button" onclick="handleDelete({{$hotel->id}})"><em class="icon ni ni-light"></em><span>Delete Hotel</span></a></li>
+                                                                <li><a href="{{ route('hotels.edit', $hotel->id) }}"><em class="icon ni ni-building"></em><span>Hotel Full View</span></a></li>
+                                                                <li><a role="button" onclick="handleDelete({{$hotel->id}})"><em class="icon ni ni-trash"></em><span>Delete Hotel</span></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>

@@ -32,6 +32,7 @@
                     </div><!-- .nk-block-head -->
                 </div><!-- .nk-block-head -->
                     
+                @include('partials.session')
                 @include('partials.error')
 
 
@@ -158,9 +159,13 @@
             data:{
                 'name' : name,
                 'type':'tours',
+                'id_type':tour_id,
             },
             success:function(data){
-              load_images();
+                if ( data['redirect']=='yes' ) {
+                    window.location.replace(data['route']);
+                }
+                load_images();
             }
           })
         });

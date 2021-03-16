@@ -13,7 +13,7 @@
                         <div class="nk-block-head-content">
                             <h2 class="nk-block-title page-title">{{ isset($hotel)?'Update':'Add' }} Hotel</h2>
                             <div class="nk-block-des text-soft">
-                                <p>All fields are required.</p>
+                                <p>* fields are required.</p>
                             </div>
                         </div>
                         
@@ -46,7 +46,7 @@
                                 <div class="row g-4">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form-label">Hotel Category</label>
+                                            <label class="form-label">Hotel Category *</label>
                                             <div class="form-control-wrap">
                                                 <select class="form-select form-control form-control-lg" name="hotelcategory_id" id="hotelcategory_id" data-search="on">
                                                     @foreach ($categories as $category)
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form-label">Country</label>
+                                            <label class="form-label">Country *</label>
                                             <div class="form-control-wrap">
                                                 <select class="form-select form-control form-control-lg" name="country_id" id="country_id" data-search="on">
                                                     @foreach ($countries as $country)
@@ -82,7 +82,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="form-label" for="pay-amount-1">Hotel Name</label>
+                                            <label class="form-label" for="pay-amount-1">Hotel Name *</label>
                                             <div class="form-control-wrap">
                                                 <input type="text" class="form-control" name="name" id="name" value="{{ isset($hotel)?$hotel->name:'' }}">
                                             </div>
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="form-label" for="pay-amount-1">Hotel Description</label>
+                                            <label class="form-label" for="pay-amount-1">Hotel Description *</label>
                                             <div class="form-control-wrap">
                                                 <textarea class="form-control" style="width: 100" name="description" id="description" cols="30" rows="10">{{ isset($hotel)?$hotel->description:'' }}</textarea>
                                             </div>
@@ -98,7 +98,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="form-label" for="city">City</label>
+                                            <label class="form-label" for="city">City *</label>
                                             <div class="form-control-wrap">
                                                 <input type="text" class="form-control" name="city" id="city" value="{{ isset($hotel)?$hotel->city:'' }}">
                                             </div>
@@ -148,7 +148,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="form-label" for="lat">Latitude</label>
+                                            <label class="form-label" for="lat">Latitude *</label>
                                             <div class="form-control-wrap">
                                                 <input type="text" class="form-control" name="lat" id="lat" value="{{ isset($hotel)?$hotel->lat:'' }}">
                                             </div>
@@ -156,7 +156,7 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="form-label" for="lng">Longitude</label>
+                                            <label class="form-label" for="lng">Longitude *</label>
                                             <div class="form-control-wrap">
                                                 <input type="text" class="form-control" name="lng" id="lng" value="{{ isset($hotel)?$hotel->lng:'' }}">
                                             </div>

@@ -17,7 +17,8 @@ class CreateTxtDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('detail_type');
             $table->string('text');
-            $table->integer('tour_id');
+            $table->unsignedBigInteger('tour_id');
+            $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

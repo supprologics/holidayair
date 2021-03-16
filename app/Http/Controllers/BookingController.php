@@ -48,7 +48,6 @@ class BookingController extends Controller
                 'country_code'=>$request->country_code,
                 'phone_number'=>$request->phone_number,
             ]);
-            //\Mail::to('vishvawm@gmail.com')->send(new \App\Mail\TourBookingConfirmMail($data));
             \Mail::to($tour->email_address)->send(new \App\Mail\TourBookingConfirm($tour));
             \Mail::to('support@prologics.lk')->send(new \App\Mail\TourBooked($tour));
             

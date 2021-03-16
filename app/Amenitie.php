@@ -13,6 +13,4 @@ class Amenitie extends Model
     public function hotels(){
         return $this->belongsToMany(Hotel::class,'hotel_has_amenities');
     }
-
-
 }

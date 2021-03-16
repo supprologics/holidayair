@@ -49,7 +49,7 @@ class TicketsController extends Controller
         ]);
 
         session()->flash('success','New Ticket Added.');
-        return redirect(route('tickets.index'));
+        return $this->index();
     }
 
     /**
@@ -92,7 +92,7 @@ class TicketsController extends Controller
         ]);
 
         session()->flash('success','Ticket Updated.');
-        return redirect(route('tickets.index'));
+        return $this->index();
     }
 
     /**

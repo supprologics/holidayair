@@ -25,7 +25,7 @@
                         <div class="flexslider photo-gallery style1" id="post-slideshow1" data-sync="#post-carousel1" data-func-on-start="showTourDetailedDiscount">
                             <ul class="slides">
                                 @foreach ($tour->gallery as $image)
-                                    <li><a href="pages-blog-read.html"><img src="{{ asset('images/tours/'.$image->file_path) }}" alt=""></a></li>
+                                    <li><a href="pages-blog-read.html"><img src="{{ asset('images/tours/'.$image->file_path) }}" alt="" style="width: 870px;height:442px"></a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -63,7 +63,13 @@
                                             <h4 class="box-title">{{ $tour->name }}<small>{{ $tour->days }} days tour</small></h4>
                                         </div>
                                         <div class="details">
-                                            <span class="price">${{ $tour->amount }}</span>
+                                            <span class="price">
+                                                @if ($tour->amount=='0.00')
+                                                    <span style="font-size: 60%">Please call for prices</span> 
+                                                @else
+                                                    ${{ $tour->amount }}
+                                                @endif
+                                            </span>
                                             <a href="{{ route('booking.tour',$tour->id) }}" class="button green btn-small uppercase">Book Tour</a>
                                         </div>
                                     </div>

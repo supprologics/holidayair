@@ -15,8 +15,10 @@ class CreateFlightPlansTable extends Migration
     {
         Schema::create('flight_plans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('deal_id');
-            $table->integer('airline_id');
+            $table->unsignedBigInteger('deal_id')->nullable();
+            $table->foreign('deal_id')->references('id')->on('deals')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('airline_id')->nullable();
+            $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('cascade')->onUpdate('cascade');
             $table->string('takeoff_airport');
             $table->string('landing_airport');
             $table->integer('time_hours');

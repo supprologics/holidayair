@@ -8,7 +8,8 @@ class Tour extends Model
 {
     protected $fillable=[
         'category_id','country_id','name','description','duration','days','nights',
-        'amount','rating','is_highlight','online','hits'
+        'amount','rating','is_highlight','online','hits',
+        'seasonon','seasonout','discount','discounton','discountout'
     ];
 
     public function category(){

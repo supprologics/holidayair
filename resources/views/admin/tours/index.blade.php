@@ -72,31 +72,26 @@
                                         </td>
                                         <td class="nk-tb-col tb-col-md">
                                                 @if ($tour->online==0)
-                                                    <span class="tb-status text-danger">Inactive</span>
+                                                    <span class="tb-status text-danger">Draft</span>
                                                 @elseif($tour->online==1)
-                                                    <span class="tb-status text-warning">Active</span>
+                                                    <span class="tb-status text-warning">Recommended</span>
                                                 @elseif($tour->online==2)
-                                                    <span class="tb-status text-success">Published</span>
+                                                    <span class="tb-status text-success">Publish</span>
                                                 @endif
                                         </td>
                                         <td class="nk-tb-col nk-tb-col-tools">
                                             <ul class="nk-tb-actions gx-1">
                                                 <li class="nk-tb-action-hidden">
-                                                    <a href="{{ route('tours.publish',$tour->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Publish">
-                                                        <em class="icon ni ni-light-fill"></em>
-                                                    </a>
+                                                    <form action="{{ route('tours.status',$tour->id) }}" method="post">
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Toggle Status"><em class="icon ni ni-repeat"></em></button>
+                                                    </form>
                                                 </li>
                                                 <li class="nk-tb-action-hidden">
-                                                    <a href="{{ route('tours.active',$tour->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Active">
+                                                    <a href="{{ route('tours.recommended',$tour->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Recommended">
                                                         <em class="icon ni ni-list-check"></em>
                                                     </a>
                                                 </li>
-                                                <li class="nk-tb-action-hidden">
-                                                    <a href="{{ route('tours.inactive',$tour->id) }}" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Inactive">
-                                                        <em class="icon ni ni-cross-fill-c"></em>
-                                                    </a>
-                                                </li>
-                                                <li>
                                                 <li>
                                                     <div class="drodown">
                                                         <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
@@ -113,6 +108,8 @@
                                                                 <li class="divider"></li>
                                                                 <li><a href="{{ route('galleryview', $tour->id) }}"><em class="icon ni ni-img"></em><span>Gallery</span></a></li>
                                                                 <li><a href="{{ route('route.index', $tour->id) }}"><em class="icon ni ni-repeat"></em><span>Route</span></a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a onclick="handleDelete({{$tour->id}})"><em class="icon ni ni-trash"></em><span>Remove</span></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -130,4 +127,43 @@
         </div>
     </div>
 </div>
+
+
+    <!-- Modal Alert -->
+    <div class="modal fade" tabindex="-1"  role="dialog" id="deleteModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="" method="post" id="deleteform">
+            {{ method_field('DELETE') }}
+            {{ csrf_field() }}
+                <div class="modal-content">
+                    <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross"></em></a>
+                    <div class="modal-body modal-body-lg text-center">
+                        <div class="nk-modal">
+                            <em class="nk-modal-icon icon icon-circle icon-circle-xxl ni ni-alert bg-warning"></em>
+                            <h4 class="nk-modal-title">Delete Tour!</h4>
+                            <div class="nk-modal-text">
+                                <div class="caption-text">Are you sure, you want to <strong>delete</strong> this Tour ?</div>
+                                <span class="sub-text-sm">This action can not be revert.</span>
+                            </div>
+                            <div class="nk-modal-action">
+                                <button type="button" class="btn-lg btn-mw btn-primary" data-dismiss="modal">No, Go back</button>
+                                <button type="submit" class="btn-lg btn-mw btn-danger">Yes, Delete</button>
+                            </div>
+                        </div>
+                    </div><!-- .modal-body -->
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
+
+
+@section('script')
+    <script>
+        function handleDelete(id){
+            var form= document.getElementById('deleteform')
+            form.action='/tours/'+id
+            $('#deleteModal').modal('show')
+        }
+    </script> 
 @endsection

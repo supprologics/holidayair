@@ -3,8 +3,11 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use App\Http\Middleware\VerfiyCountriesCount;
 use App\Http\Middleware\VerifyAdmin;
+use App\Http\Middleware\verifyBlogCategoryCount;
+use App\Http\Middleware\verifyTourCategoryCount;
+use App\Http\Middleware\verifyCountriesCount;
+use App\Http\Middleware\verifyHotelCategoryCount;
 
 class Kernel extends HttpKernel
 {
@@ -62,8 +65,11 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'verifyCountriesCount' => VerfiyCountriesCount::class,
         'sysAdmin' => VerifyAdmin::class,
+        'verifyBlogCategoryCount' => verifyBlogCategoryCount::class,
+        'verifyTourCategoryCount' => verifyTourCategoryCount::class,
+        'verifyCountriesCount' => verifyCountriesCount::class,
+        'verifyHotelCategoryCount' => verifyHotelCategoryCount::class,
     ];
 
     /**

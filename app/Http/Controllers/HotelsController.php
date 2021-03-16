@@ -11,6 +11,11 @@ use App\Http\Requests\Hotels\HotelsUpdateRequest;
 
 class HotelsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('verifyHotelCategoryCount')->only(['create','store']);
+        $this->middleware('verifyCountriesCount')->only(['create','store']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -58,7 +63,7 @@ class HotelsController extends Controller
             'lng'=>$request->lng,
             'minstay'=>$request->minstay,
             'rating'=>'5',
-            'flag'=>'1',
+            'flag'=>'0',
             'logo'=>$logo,
         ]);
 
@@ -131,10 +136,16 @@ class HotelsController extends Controller
 
     public function published(Hotel $hotel)
     {
-        $hotel->update([
-            'flag'=>'1',
-        ]);
-        return redirect(route('hotels.index'));
+        if($hotel->gallery->count()==0){
+            session()->flash('error','Please upload hotel images for publish hotel');
+            return redirect(route('hotelgalleryview' ,$hotel->id));
+        }
+        else{
+            $hotel->Update([
+                'flag'=>1,
+            ]);
+        }
+        return $this->index();
     }
 
     public function draft(Hotel $hotel)
@@ -142,22 +153,60 @@ class HotelsController extends Controller
         $hotel->update([
             'flag'=>'0',
         ]);
-        return redirect(route('hotels.index'));
+        return $this->index();
+    }
+
+    public function status(Hotel $hotel){
+        
+        if($hotel->flag=='1' || $hotel->flag=='2' || $hotel->flag=='3'){            
+            $hotel->flag='0';
+            $hotel->save();
+            session()->flash('success','Hotel Saved as draft');
+        }
+        else{
+            if($hotel->gallery->count()==0){
+                session()->flash('error','Please upload hotel images for publish hotel');
+                return redirect(route('hotelgalleryview' ,$hotel->id));
+            }
+            $hotel->flag='1';
+            $hotel->save();
+            session()->flash('success','Hotel Published');
+        }
+        return $this->index();
+
     }
 
     public function travelerchoice(Hotel $hotel)
     {
-        $hotel->update([
-            'flag'=>'3',
-        ]);
-        return redirect(route('hotels.index'));
-    }
-    public function recommended(Hotel $hotel)
-    {
-        $hotel->update([
-            'flag'=>'2',
-        ]);
-        return redirect(route('hotels.index'));
+        if($hotel->gallery->count()==0){
+            session()->flash('error','Please upload hotel images for publish hotel');
+            return redirect(route('hotelgalleryview' ,$hotel->id));
+        }
+        else{
+            $hotel->Update([
+                'flag'=>3,
+            ]);
+        }
+        return $this->index();
     }
 
+    public function recommended(Hotel $hotel)
+    {
+        if($hotel->gallery->count()==0){
+            session()->flash('error','Please upload hotel images for publish hotel');
+            return redirect(route('hotelgalleryview' ,$hotel->id));
+        }
+        else{
+            $hotel->Update([
+                'flag'=>'2',
+            ]);
+        }
+        return $this->index();
+    }
+
+    public function amenitieupdate(Request $request,Hotel $hotel){
+        $hotel->amenities()->sync($request->hotelamenties);
+        session()->flash('success','Hotel Amenities Updated');
+        return redirect(route('hotelamenities.index',$hotel->id));
+    }
 }

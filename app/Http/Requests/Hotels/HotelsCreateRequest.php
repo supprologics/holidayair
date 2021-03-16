@@ -31,7 +31,6 @@ class HotelsCreateRequest extends FormRequest
             'city'=>'required',
             'lat'=>'required',
             'lng'=>'required',
-            'logo'=>'image',
         ];
     }
 }

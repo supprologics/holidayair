@@ -26,6 +26,7 @@
                                                 </div>
                                             </div>
                                         </div> -->
+                                        @include('partials.session')
                                         @include('partials.error')
                                         <div class="card card-bordered">
                                             <div class="card-inner">

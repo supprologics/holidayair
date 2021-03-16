@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Deal;
 use App\Airline;
 use App\Country;
+use App\FlightTicketsCategory;
 use App\Http\Requests\Deals\DealsCreateRequest;
 use App\Http\Requests\Deals\DealsUpdateRequest;
 
@@ -28,7 +29,7 @@ class DealsController extends Controller
      */
     public function create()
     {
-        return view('admin.deals.create')->with('airlines',Airline::all())->with('countries',Country::all());
+        return view('admin.deals.create')->with('airlines',Airline::all())->with('countries',Country::all())->with('flightticketscategories',FlightTicketsCategory::all());
     }
 
     /**
@@ -81,7 +82,7 @@ class DealsController extends Controller
      */
     public function edit(Deal $deal)
     {
-        return view('admin.deals.create')->with('deal',$deal)->with('airlines',Airline::all())->with('countries',Country::all());
+        return view('admin.deals.create')->with('deal',$deal)->with('airlines',Airline::all())->with('countries',Country::all())->with('flightticketscategories',FlightTicketsCategory::all());
     }
 
     /**

@@ -15,9 +15,8 @@ class CreateBlogsTable extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('blog_category_id');
-            $table->integer('country_id')->nullable();
-            $table->integer('area_id')->nullable();
+            $table->unsignedBigInteger('blog_category_id')->nullable();
+            $table->foreign('blog_category_id')->references('id')->on('blog_categories')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->string('description_short');
             $table->text('description_full');

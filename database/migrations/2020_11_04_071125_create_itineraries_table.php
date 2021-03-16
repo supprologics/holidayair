@@ -16,7 +16,8 @@ class CreateItinerariesTable extends Migration
         Schema::create('itineraries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->integer('tour_id');
+            $table->unsignedBigInteger('tour_id');
+            $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade')->onUpdate('cascade');
             $table->text('description');
             $table->timestamps();
         });

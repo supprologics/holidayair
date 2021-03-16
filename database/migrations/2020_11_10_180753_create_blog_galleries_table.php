@@ -16,7 +16,8 @@ class CreateBlogGalleriesTable extends Migration
         Schema::create('blog_galleries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('file_path');
-            $table->integer('blog_id');
+            $table->unsignedBigInteger('blog_id')->nullable();
+            $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

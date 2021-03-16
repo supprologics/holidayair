@@ -33,6 +33,7 @@
                 </div><!-- .nk-block-head -->
                     
                 @include('partials.error')
+                @include('partials.session')
 
 
                 <div class="nk-block" >
@@ -56,9 +57,15 @@
                             </a>
                         </li>
                         <li class="nk-block-tools-opt">
-                            <a href="{{ route('blogs.index') }}" class="btn btn-primary">
+                            <a href="{{ route('blog.draft',$blog->id) }}" class="btn btn-primary">
                                 <em class="icon ni ni-save"></em>
-                                <span>Save</span>
+                                <span>Save as Draft</span>
+                            </a>
+                        </li>
+                        <li class="nk-block-tools-opt">
+                            <a href="{{ route('blog.publish',$blog->id) }}" class="btn btn-primary">
+                                <em class="icon ni ni-light"></em>
+                                <span>Publish Post</span>
                             </a>
                         </li>
                     </ul>
@@ -157,8 +164,12 @@
             data:{
                 'name' : name,
                 'type':'blog',
+                'id_type':post_id,
             },
             success:function(data){
+                if ( data['redirect']=='yes' ) {
+                    window.location.replace(data['route']);
+                }
               load_images();
             }
           })

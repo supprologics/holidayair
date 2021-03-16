@@ -12,6 +12,10 @@ use App\Http\Requests\Tours\ToursUpdateRequest;
 
 class ToursController extends Controller
 {
+    public function __construct(){
+        $this->middleware('verifyTourCategoryCount')->only(['create','store']);
+        $this->middleware('verifyCountriesCount')->only(['create','store']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -48,12 +52,13 @@ class ToursController extends Controller
         if(empty($request->hits)){
             $request->hits=0;
         }
-        if(empty($request->is_highlight)){
-            $request->is_highlight=0;
+        if($request->seasonon=='0'){
+            $request->seasonon=null;
         }
-        if(empty($request->online)){
-            $request->online=0;
+        if($request->seasonout=='0'){
+            $request->seasonout=null;
         }
+
         $tour=Tour::create([
             'category_id'=>$request->category_id,
             'country_id'=>$request->country_id,
@@ -65,8 +70,12 @@ class ToursController extends Controller
             'amount'=>$request->amount,
             'rating'=>$request->rating,
             'hits'=>$request->hits,
-            'is_highlight'=>$request->is_highlight,
-            'online'=>$request->online,
+            'online'=>'0',
+            'seasonon'=>$request->seasonon,
+            'seasonout'=>$request->seasonout,
+            'discount'=>$request->discount,
+            'discounton'=>$request->discounton,
+            'discountout'=>$request->discountout,
         ]);
 
         session()->flash('success','New Tour added.Update itineraries.');
@@ -112,11 +121,11 @@ class ToursController extends Controller
     if(empty($request->hits)){
         $request->hits=0;
     }
-    if(empty($request->is_highlight)){
-        $request->is_highlight=0;
+    if($request->seasonon=='0'){
+        $request->seasonon=null;
     }
-    if(empty($request->online)){
-        $request->online=0;
+    if($request->seasonout=='0'){
+        $request->seasonout=null;
     }
     
         $tour->Update([
@@ -130,8 +139,11 @@ class ToursController extends Controller
             'amount'=>$request->amount,
             'rating'=>$request->rating,
             'hits'=>$request->hits,
-            'is_highlight'=>$request->is_highlight,
-            'online'=>$request->online,
+            'seasonon'=>$request->seasonon,
+            'seasonout'=>$request->seasonout,
+            'discount'=>$request->discount,
+            'discounton'=>$request->discounton,
+            'discountout'=>$request->discountout,
         ]);
         
         session()->flash('success','Tour Updated.Update itineraries.');
@@ -154,25 +166,60 @@ class ToursController extends Controller
 
     public function publish(Tour $tour)
     {
-        $tour->Update([
-            'online'=>2,
-        ]);
+        if($tour->gallery->count()==0){
+            session()->flash('error','Please upload tour images for publish tour');
+            return redirect(route('galleryview' ,$tour->id));
+        }
+        else{
+            $tour->Update([
+                'online'=>2,
+            ]);
+        }
         return $this->index();
+        
     }
 
-    public function active(Tour $tour)
-    {
-        $tour->Update([
-            'online'=>1,
-        ]);
-        return $this->index();
-    }
-
-    public function inactive(Tour $tour)
+    public function draft(Tour $tour)
     {
         $tour->Update([
             'online'=>0,
         ]);
         return $this->index();
+        
     }
+
+    public function status(Tour $tour){
+        
+        if($tour->online=='1' || $tour->online=='2'){            
+            $tour->online='0';
+            $tour->save();
+            session()->flash('success','Tour Saved as draft');
+        }
+        else{
+            if($tour->gallery->count()==0){
+                session()->flash('error','Please upload tour images for publish tour');
+                return redirect(route('galleryview' ,$tour->id));
+            }
+            $tour->online='2';
+            $tour->save();
+            session()->flash('success','Tour Published');
+        }
+        return $this->index();
+
+    }
+
+    public function recommended(Tour $tour)
+    {
+        if($tour->gallery->count()==0){
+            session()->flash('error','Please upload tour images for publish tour');
+            return redirect(route('galleryview' ,$tour->id));
+        }
+        else{
+            $tour->Update([
+                'online'=>1,
+            ]);
+        }
+        return $this->index();
+    }
+
 }

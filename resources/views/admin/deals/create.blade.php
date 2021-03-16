@@ -122,30 +122,19 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form-label">Class Type</label>
+                                            
+                                            <label class="form-label">Ticket Category</label>
                                             <div class="form-control-wrap">
-                                                <select class="form-select form-control form-control-lg" data-search="off" name="class_type" id="class_type">
-                                                        <option value="Economy"
-                                                            @if (isset($deal))
-                                                                @if ($deal->class_type=='Economy')
+                                                <select class="form-select form-control form-control-lg" name="class_type" id="class_type" data-search="on">
+                                                    @foreach ($flightticketscategories as $flightticketscategorie)
+                                                        <option value="{{ $flightticketscategorie->id }}"
+                                                            @if (isset($ticket))
+                                                                @if ($flightticketscategorie->id==$ticket->flight_ticket_category_id)
                                                                     selected
                                                                 @endif
                                                             @endif
-                                                        >Economy</option>
-                                                        <option value="First"
-                                                            @if (isset($deal))
-                                                                @if ($deal->class_type=='First')
-                                                                    selected
-                                                                @endif
-                                                            @endif
-                                                        >First</option>
-                                                        <option value="Business"
-                                                            @if (isset($deal))
-                                                                @if ($deal->class_type=='Business')
-                                                                    selected
-                                                                @endif
-                                                            @endif
-                                                        >Business</option>
+                                                        >{{ $flightticketscategorie->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>

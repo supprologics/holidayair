@@ -35,7 +35,7 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CountriesCreateRequest $request)
+    public function store(CategoriesCreateRequest $request)
     {
         Category::create([
             'name'=>$request->name,
@@ -74,7 +74,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CountriesUpdateRequest $request,Category $category)
+    public function update(CategoriesUpdateRequest $request,Category $category)
     {
         $category->update([
             'name'=>$request->name,

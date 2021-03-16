@@ -15,15 +15,21 @@ class CreateDealsTable extends Migration
     {
         Schema::create('deals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('airline_id');
-            $table->integer('country_id');
+            $table->unsignedBigInteger('airline_id')->nullable();
+            $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('country_id')->nullable();
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->string('flight_type');
             $table->decimal('amount',10,2);
             $table->text('description');
-            $table->string('class_type');
-            $table->decimal('cancellation_fee',10,2);
-            $table->decimal('flight_change_fee',10,2);
+            $table->unsignedBigInteger('class_type')->nullable();
+            $table->foreign('class_type')->references('id')->on('flight_tickets_categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('cancellation_fee',10,2);
+            $table->string('flight_change_fee',10,2);
+            $table->integer('discount')->nullable();
+            $table->date('discounton')->nullable();
+            $table->date('discountout')->nullable();
             $table->timestamps();
         });
     }

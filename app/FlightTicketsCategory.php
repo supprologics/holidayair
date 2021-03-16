@@ -14,4 +14,10 @@ class FlightTicketsCategory extends Model
         return $this->hasMany(Ticket::class);
     }
 
+    public function deals()
+    {
+        return $this->hasMany(Deal::class);
+    }
+
+
 }

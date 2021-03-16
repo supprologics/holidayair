@@ -23,9 +23,13 @@ Route::get('/flight/{deal}', 'SiteController@flightview')->name('flightview');
 Route::get('/hotel', 'SiteController@hotel')->name('hotel');
 Route::get('/hotel/{hotel}', 'SiteController@hotelview')->name('hotelview');
 Route::post('/search-tour', 'SiteController@searchtour')->name('search.tour');
+Route::post('/search-hotel', 'SiteController@searchhotel')->name('search.hotel');
+Route::post('/search-flight', 'SiteController@searchflight')->name('search.flight');
 Route::get('/booking-tour/{tour}', 'BookingController@bookingtour')->name('booking.tour');
 Route::post('/booktour', 'BookingController@booktour')->name('booktour');
-
+//socialite google
+Route::get('login/google', 'Auth\LoginController@redirectToProvider');
+Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
 Auth::routes();
 
 
@@ -40,6 +44,8 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('itineraries','ItinerariesController');
     Route::get('setitineraries/{tour}','ItinerariesController@setitineraries')->name('setitineraries');
     Route::get('newitinerary/{tour}','ItinerariesController@newitinerary')->name('newitinerary');
+    Route::post('toursstatus/{tour}','ToursController@status')->name('tours.status');
+    Route::get('toursrecommended/{tour}','ToursController@recommended')->name('tours.recommended');
 
     #itinerary ajax routes
     Route::post('additinerary','ItinerariesController@additinerary')->name('additinerary');
@@ -74,7 +80,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('deleteroute','RoutesController@deleteroute')->name('deleteroute');
     #publish
     Route::get('publish/{tour}','ToursController@publish')->name('tours.publish');
-    Route::get('active/{tour}','ToursController@active')->name('tours.active');
+    Route::get('draft/{tour}','ToursController@draft')->name('tours.draft');
     Route::get('inactive/{tour}','ToursController@inactive')->name('tours.inactive');
 
 
@@ -83,6 +89,9 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('blogs','BlogsController');
 
     Route::get('bloggalleryview/{blog}','GalleryController@bloggalleryview')->name('bloggalleryview');
+    Route::get('publishblog/{blog}','BlogsController@publish')->name('blog.publish');
+    Route::get('draftblog/{blog}','BlogsController@draft')->name('blog.draft');
+    Route::post('blogsstatus/{blog}','BlogsController@status')->name('blog.status');
 
 
     //flight
@@ -114,11 +123,13 @@ Route::middleware(['auth'])->group(function(){
     Route::post('deleteamenitie','AmenitiesController@deleteamenitie')->name('deleteamenitie');
     
     Route::resource('hotels','HotelsController');
-    Route::get('published/{hotel}','HotelsController@published')->name('hotels.published');
-    Route::get('draft/{hotel}','HotelsController@draft')->name('hotels.draft');
-    Route::get('travelerchoice/{hotel}','HotelsController@travelerchoice')->name('hotels.travelerchoice');
-    Route::get('recommended/{hotel}','HotelsController@recommended')->name('hotels.recommended');
+    Route::get('publishhotel/{hotel}','HotelsController@published')->name('hotels.published');
+    Route::get('drafthotel/{hotel}','HotelsController@draft')->name('hotels.draft');
+    Route::get('travelerchoicehotel/{hotel}','HotelsController@travelerchoice')->name('hotels.travelerchoice');
+    Route::get('recommendedhotel/{hotel}','HotelsController@recommended')->name('hotels.recommended');
+    Route::post('hotelsstatus/{hotel}','HotelsController@status')->name('hotels.status');
     
+    Route::post('amenitieupdate/{hotel}','HotelsController@amenitieupdate')->name('hotels.amenitieupdate');
     Route::get('hotelamenities/{hotel}','HotelAmenitiesController@index')->name('hotelamenities.index');
     Route::post('addhotelamenitie','HotelAmenitiesController@addhotelamenitie')->name('addhotelamenitie');
     Route::post('deletehotelamenitie','HotelAmenitiesController@deletehotelamenitie')->name('deletehotelamenitie');

@@ -36,41 +36,6 @@
                                                     <div class="card-title">
                                                         <h5 class="title">All Blog Categories</h5>
                                                     </div>
-                                                    <div class="card-tools mr-n1">
-                                                        <ul class="btn-toolbar">
-                                                            <li>
-                                                                <a href="#" class="btn btn-icon search-toggle toggle-search" data-target="search"><em class="icon ni ni-search"></em></a>
-                                                            </li><!-- li -->
-                                                            <li class="btn-toolbar-sep"></li><!-- li -->
-                                                            <li>
-                                                                <div class="dropdown">
-                                                                    <a href="#" class="btn btn-trigger btn-icon dropdown-toggle" data-toggle="dropdown">
-                                                                        <em class="icon ni ni-setting"></em>
-                                                                    </a>
-                                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
-                                                                        <ul class="link-check">
-                                                                            <li><span>Show</span></li>
-                                                                            <li class="active"><a href="#">10</a></li>
-                                                                            <li><a href="#">20</a></li>
-                                                                            <li><a href="#">50</a></li>
-                                                                        </ul>
-                                                                        <ul class="link-check">
-                                                                            <li><span>Order</span></li>
-                                                                            <li class="active"><a href="#">DESC</a></li>
-                                                                            <li><a href="#">ASC</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div><!-- .dropdown -->
-                                                            </li><!-- li -->
-                                                        </ul><!-- .btn-toolbar -->
-                                                    </div><!-- card-tools -->
-                                                    <div class="card-search search-wrap" data-search="search">
-                                                        <div class="search-content">
-                                                            <a href="#" class="search-back btn btn-icon toggle-search" data-target="search"><em class="icon ni ni-arrow-left"></em></a>
-                                                            <input type="text" class="form-control form-control-sm border-transparent form-focus-none" placeholder="Quick search by order id">
-                                                            <button class="search-submit btn btn-icon"><em class="icon ni ni-search"></em></button>
-                                                        </div>
-                                                    </div><!-- card-search -->
                                                 </div><!-- .card-title-group -->
                                             </div><!-- .card-inner -->
                                             <div class="card-inner p-0">

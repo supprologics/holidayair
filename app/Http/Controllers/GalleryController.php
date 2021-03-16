@@ -90,10 +90,10 @@ class GalleryController extends Controller
             {
             $output .= '
             <div class="col-md-3">
-                <div class="card mb-4" >
+                <div class="card mb-4" style="width:100%; min-width:200px;">
                     <div class="view overlay">
                     <img class="card-img-top" src="'.asset('images/'.$request->type.'/' . $image->file_path).'"
-                    alt="Card image cap" style="width:400px; height:250px">
+                    alt="Card image cap" style="width:100%; min-width:200px; height:250px">
                     <div class="mask rgba-white-slight "></div>
                     </div>
                 
@@ -116,14 +116,38 @@ class GalleryController extends Controller
             if($request->type=='deal'){
                 FlightDealGallery::where('file_path', $del_id)->delete();
             }
+
             if($request->type=='tours'){
-                Gallery::where('file_path', $del_id)->delete();
+                $tour=Tour::find($request->id_type);
+                if($tour->gallery->count()==1){
+                    session()->flash('error','You cannot empty image field.upload new image and delete older.');
+                    return response()->json(['redirect'=>'yes','route'=>route('galleryview' ,$tour->id)]);
+                }
+                else{
+                    Gallery::where('file_path', $del_id)->delete();
+                }
             }
+
             if($request->type=='blog'){
-                BlogGallery::where('file_path', $del_id)->delete();
+                $blog=Blog::find($request->id_type);
+                if($blog->gallery->count()==1){
+                    session()->flash('error','You cannot empty image field.upload new image and delete older.');
+                    return response()->json(['redirect'=>'yes','route'=>route('bloggalleryview' ,$blog->id)]);
+                }
+                else{
+                    BlogGallery::where('file_path', $del_id)->delete();
+                }
             }
+
             if($request->type=='hotel'){
-                HotelGallery::where('file_path', $del_id)->delete();
+                $hotel=Hotel::find($request->id_type);
+                if($hotel->gallery->count()==1){
+                    session()->flash('error','You cannot empty image field.upload new image and delete older.');
+                    return response()->json(['redirect'=>'yes','route'=>route('hotelgalleryview' ,$hotel->id)]);
+                }
+                else{
+                    HotelGallery::where('file_path', $del_id)->delete();
+                }
             }
             \File::delete(public_path('images/'.$request->type.'/' . $request->get('name')));
         }

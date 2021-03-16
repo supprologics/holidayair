@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Country;
+use App\BlogCategory;
 
-class VerfiyCountriesCount
+class verifyBlogCategoryCount
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class VerfiyCountriesCount
      */
     public function handle($request, Closure $next)
     {
-        if(Country::all()->count() == 0){
-            session()->flash('error','You need to add countries to be able to add a area.');
-            return redirect(route('countries.index'));
+        if(BlogCategory::all()->count()==0){
+            session()->flash('error','You need to add post cetegories to be able to create post');
+            return redirect(route('blogcategories.create'));
         }
         return $next($request);
     }

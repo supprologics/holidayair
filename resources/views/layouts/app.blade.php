@@ -47,16 +47,6 @@
                                     </li>
                                 @endif
                                 <li class="nk-menu-item">
-                                    <a href="#" class="nk-menu-link" title="About Us">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-cc-alt"></em></span>
-                                    </a>
-                                </li>
-                                <li class="nk-menu-item">
-                                    <a href="#" class="nk-menu-link" title="Contact Us">
-                                        <span class="nk-menu-icon"><em class="icon ni ni-cc-alt2"></em></span>
-                                    </a>
-                                </li>
-                                <li class="nk-menu-item">
                                     <a href="#" class="nk-menu-link" title="Home Covers">
                                         <span class="nk-menu-icon"><em class="icon ni ni-cc"></em></span>
                                     </a>
@@ -269,35 +259,11 @@
                                                     </li>
                                                 </ul>
                                                 <ul class="list-apps">
-                                                    <li>
-                                                        <a href="#">
-                                                            <span class="list-apps-media"><em class="icon ni ni-trash bg-warning-dim"></em></span>
-                                                            <span class="list-apps-title">Tours Recycle</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span class="list-apps-media"><em class="icon ni ni-trash bg-success-dim"></em></span>
-                                                            <span class="list-apps-title">Flights Recycle</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span class="list-apps-media"><em class="icon ni ni-trash bg-danger-dim"></em></span>
-                                                            <span class="list-apps-title">Hotels Recycle</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-                                                            <span class="list-apps-media"><em class="icon ni ni-trash bg-purple-dim"></em></span>
-                                                            <span class="list-apps-title">Blogs Recycle</span>
-                                                        </a>
-                                                    </li>
                                                     @if (auth()->user()->isAdmin())
                                                         <li>
                                                             <a href="#">
                                                                 <span class="list-apps-media"><em class="icon ni ni-trash bg-danger-dim"></em></span>
-                                                                <span class="list-apps-title">Users Recycle</span>
+                                                                <span class="list-apps-title">Recycle</span>
                                                             </a>
                                                         </li>
                                                     @endif
@@ -371,16 +337,52 @@
                                     <span class="nk-menu-text">Tour Categories</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-heading">
+                                <h6 class="overline-title text-primary-alt">Hotel Department</h6>
+                            </li><!-- .nk-menu-heading -->
                             <li class="nk-menu-item">
-                                <a href="{{ route('countries.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-globe"></em></span>
-                                    <span class="nk-menu-text">Tour Countries</span>
+                                <a href="{{ route('hotels.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
+                                    <span class="nk-menu-text">Hotel Manage</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item">
-                                <a href="{{ route('areas.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-map-pin"></em></span>
-                                    <span class="nk-menu-text">Tour Areas</span>
+                                <a href="{{ route('hotelcategories.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-menu-alt"></em></span>
+                                    <span class="nk-menu-text">Hotel Categories</span>
+                                </a>
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-item">
+                                <a href="{{ route('amenities.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-grid-add-c"></em></span>
+                                    <span class="nk-menu-text">Hotel Amenities</span>
+                                </a>
+                            </li>
+                            <li class="nk-menu-heading">
+                                <h6 class="overline-title text-primary-alt">Flight Department</h6>
+                            </li><!-- .nk-menu-heading -->
+                            <li class="nk-menu-item has-sub">
+                                <a href="{{ route('deals.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-spark"></em></span>
+                                    <span class="nk-menu-text">Deals Manage</span>
+                                </a>
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-item has-sub">
+                                <a href="{{ route('tickets.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-piority"></em></span>
+                                    <span class="nk-menu-text">Ticket Manage</span>
+                                </a>
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-item has-sub">
+                                <a href="{{ route('flightticketcategories.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-menu-alt"></em></span>
+                                    <span class="nk-menu-text">Flight Ticket Categories</span>
+                                </a>
+                            </li><!-- .nk-menu-item -->
+                            <li class="nk-menu-item has-sub">
+                                <a href="{{ route('airlines.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-send"></em></span>
+                                    <span class="nk-menu-text">Airline Manage</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-heading">
@@ -405,53 +407,20 @@
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-heading">
-                                <h6 class="overline-title text-primary-alt">Flight Department</h6>
+                                <h6 class="overline-title text-primary-alt">Location Handle</h6>
                             </li><!-- .nk-menu-heading -->
-                            <li class="nk-menu-item has-sub">
-                                <a href="{{ route('deals.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-send"></em></span>
-                                    <span class="nk-menu-text">Deals Manage</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item has-sub">
-                                <a href="{{ route('tickets.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-send"></em></span>
-                                    <span class="nk-menu-text">Ticket Manage</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item has-sub">
-                                <a href="{{ route('flightticketcategories.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-menu-alt"></em></span>
-                                    <span class="nk-menu-text">Flight Ticket Categories</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item has-sub">
-                                <a href="{{ route('airlines.index') }}" class="nk-menu-link">
+                            <li class="nk-menu-item">
+                                <a href="{{ route('countries.index') }}" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-globe"></em></span>
-                                    <span class="nk-menu-text">Airline Manage</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-heading">
-                                <h6 class="overline-title text-primary-alt">Hotel Department</h6>
-                            </li><!-- .nk-menu-heading -->
-                            <li class="nk-menu-item">
-                                <a href="{{ route('hotels.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-building"></em></span>
-                                    <span class="nk-menu-text">Hotel Manage</span>
+                                    <span class="nk-menu-text">Countries</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item">
-                                <a href="{{ route('hotelcategories.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-menu-alt"></em></span>
-                                    <span class="nk-menu-text">Hotel Categories</span>
+                                <a href="{{ route('areas.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-map-pin"></em></span>
+                                    <span class="nk-menu-text">Areas</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item">
-                                <a href="{{ route('amenities.index') }}" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-globe"></em></em></span>
-                                    <span class="nk-menu-text">Hotel Amenities</span>
-                                </a>
-                            </li>
                         </ul><!-- .nk-menu -->
                     </div>
                 </div>

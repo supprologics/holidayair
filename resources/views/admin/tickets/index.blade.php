@@ -10,7 +10,7 @@
 
                     <div class="nk-block-between g-3">
                         <div class="nk-block-head-content">
-                            <h2 class="nk-block-title page-title">Tours</h2>
+                            <h2 class="nk-block-title page-title">Tickets</h2>
                             <div class="nk-block-des text-soft">
                                 <p>All Tickets.</p>
                             </div>

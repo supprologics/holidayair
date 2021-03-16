@@ -12,6 +12,9 @@ use App\Http\Requests\Blogs\BlogsUpdateRequest;
 
 class BlogsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('verifyBlogCategoryCount')->only(['create','store']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,19 +43,14 @@ class BlogsController extends Controller
      */
     public function store(BlogsCreateRequest $request)
     {
-        if(empty($request->flag)){
-            $request->flag=0;
-        }
 
         $blog=Blog::create([
             'blog_category_id'=>$request->blog_category_id,
-            'country_id'=>$request->country_id,
-            'area_id'=>$request->area_id,
             'name'=>$request->name,
             'description_short'=>$request->description_short,
             'description_full'=>$request->description_full,
             'tags'=>$request->tags,
-            'flag'=>$request->flag,
+            'flag'=>'0',
             'amount'=>$request->amount,
         ]);
 
@@ -91,19 +89,13 @@ class BlogsController extends Controller
      */
     public function update(BlogsUpdateRequest $request,Blog $blog)
     {
-        if(empty($request->flag)){
-            $request->flag=0;
-        }
 
         $blog->update([
             'blog_category_id'=>$request->blog_category_id,
-            'country_id'=>$request->country_id,
-            'area_id'=>$request->area_id,
             'name'=>$request->name,
             'description_short'=>$request->description_short,
             'description_full'=>$request->description_full,
             'tags'=>$request->tags,
-            'flag'=>$request->flag,
             'amount'=>$request->amount,
         ]);
 
@@ -123,6 +115,50 @@ class BlogsController extends Controller
 
         session()->flash('success','Post Deleted');
         return redirect(route('blogs.index'));
+    }
+
+    public function publish(Blog $blog)
+    {
+        if($blog->gallery->count()==0){
+            session()->flash('error','Please upload post images for publish post');
+            return redirect(route('bloggalleryview' ,$blog->id));
+        }
+        else{
+            $blog->Update([
+                'flag'=>1,
+            ]);
+        }
+        return $this->index();
+        
+    }
+    
+    public function draft(Blog $blog)
+    {
+        $blog->Update([
+            'flag'=>0,
+        ]);
+        return $this->index();
+        
+    }
+
+    public function status(Blog $blog){
+        
+        if($blog->flag=='1'){            
+            $blog->flag='0';
+            $blog->save();
+            session()->flash('success','Post Saved as draft');
+        }
+        else{
+            if($blog->gallery->count()==0){
+                session()->flash('error','Please upload post images for publish post');
+                return redirect(route('bloggalleryview' ,$blog->id));
+            }
+            $blog->flag='1';
+            $blog->save();
+            session()->flash('success','Post Published');
+        }
+        return $this->index();
+
     }
 
 

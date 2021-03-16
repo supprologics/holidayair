@@ -53,11 +53,46 @@
                     
                     <div id="hotel-features" class="tab-container">
                         <ul class="tabs">
-                            <li class="active"><a href="#hotel-description" data-toggle="tab">Description</a></li>
+                            <li class="active"><a href="#hotel-rooms" data-toggle="tab">Rooms</a></li>
+                            <li ><a href="#hotel-description" data-toggle="tab">Description</a></li>
                             <li><a href="#hotel-amenities" data-toggle="tab">Amenities</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade in active" id="hotel-description">
+                            <div class="tab-pane fade in active" id="hotel-rooms"> 
+                                <div class="hotel-list listing-style3 hotel">
+                                    @foreach ($hotel->rooms as $room)
+                                    <article class="box" style="border: 2px solid #2D3E52">
+                                        <figure class="col-sm-5 col-md-4">
+                                            <img  style="width: 270px; height:160px" alt="" src="{{ asset('storage/'.$room->image)}}"></a>
+                                        </figure>
+                                        <div class="details col-sm-7 col-md-8">
+                                            <div>
+                                                <div>
+                                                    <h4 class="box-title">{{ $room->name }} <small><i class="soap-icon-comfort yellow-color mx-2"></i> {{ $room->roomavailable->count() }} Rooms | <i class="soap-icon-man-3 yellow-color mx-2"></i> {{ $room->adults}} Adults | <i class="soap-icon-man-1 yellow-color mx-2"></i> {{ $room->kids }} Kids</small></h4>
+                                                   
+                                                </div>
+                                                <div>
+                                                    <div class="five-stars-container">
+                                                        <span class="five-stars" style="width: 80%;"></span>
+                                                    </div>
+                                                    <span class="review">270 reviews</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    
+                                                    {{ substr($room->description,0,180) }}</p>
+                                                <div>
+                                                    <span class="price"><small>AVG/NIGHT</small>${{ $room->amount }}</span>
+                                                    <a class="button btn-small full-width text-center" title="" href="hotel-detailed.html">SELECT</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in " id="hotel-description">
                                 <div class="intro table-wrapper full-width hidden-table-sms">
                                     <div class="col-sm-5 col-lg-4 features table-cell">
                                         <ul>

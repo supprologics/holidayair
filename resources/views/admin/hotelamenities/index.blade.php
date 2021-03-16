@@ -37,12 +37,10 @@
 
                 @include('partials.header',[
                     'header'=>'Hotel Amenities ',
-                    'icon'=>'ni-plus',
-                    'button'=>'Attach New Amenitie',
-                    'button_id'=>'attach-amenitie',
                 ])
                     
                 @include('partials.error')
+                @include('partials.session')
 
 
                 <div class="nk-block">
@@ -53,100 +51,9 @@
                                     <div class="card-title">
                                         <h5 class="title">All Hotel Amenities</h5>
                                     </div>
-                                    <div class="card-tools mr-n1">
-                                        <ul class="btn-toolbar">
-                                            <li>
-                                                <a href="#" class="btn btn-icon search-toggle toggle-search" data-target="search"><em class="icon ni ni-search"></em></a>
-                                            </li><!-- li -->
-                                            <li class="btn-toolbar-sep"></li><!-- li -->
-                                            <li>
-                                                <div class="dropdown">
-                                                    <a href="#" class="btn btn-trigger btn-icon dropdown-toggle" data-toggle="dropdown">
-                                                        <em class="icon ni ni-setting"></em>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
-                                                        <ul class="link-check">
-                                                            <li><span>Show</span></li>
-                                                            <li class="active"><a href="#">10</a></li>
-                                                            <li><a href="#">20</a></li>
-                                                            <li><a href="#">50</a></li>
-                                                        </ul>
-                                                        <ul class="link-check">
-                                                            <li><span>Order</span></li>
-                                                            <li class="active"><a href="#">DESC</a></li>
-                                                            <li><a href="#">ASC</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div><!-- .dropdown -->
-                                            </li><!-- li -->
-                                        </ul><!-- .btn-toolbar -->
-                                    </div><!-- card-tools -->
-                                    <div class="card-search search-wrap" data-search="search">
-                                        <div class="search-content">
-                                            <a href="#" class="search-back btn btn-icon toggle-search" data-target="search"><em class="icon ni ni-arrow-left"></em></a>
-                                            <input type="text" class="form-control form-control-sm border-transparent form-focus-none" placeholder="Quick search by order id">
-                                            <button class="search-submit btn btn-icon"><em class="icon ni ni-search"></em></button>
-                                        </div>
-                                    </div><!-- card-search -->
                                 </div><!-- .card-title-group -->
                             </div><!-- .card-inner -->
-                            <div class="card-inner p-0">
-                                <table class="table table-tranx" id="table">
-                                    <thead>
-                                        <tr class="tb-tnx-head">
-                                            <th class="tb-tnx-info">
-                                                <span class="tb-tnx-info d-none d-sm-inline-block">
-                                                    <span> Name</span>
-                                                </span>
-                                            </th>
-                                            <th class="tb-tnx-info">
-                                                <span class="tb-tnx-info d-none d-sm-inline-block">
-                                                    <span>Icon</span>
-                                                </span>
-                                            </th>
-                                            <th class="tb-tnx-action">
-                                                <span class="tb-tnx-info d-none d-sm-inline-block">
-                                                    <span></span>
-                                                </span>
-                                            </th>
-                                        </tr><!-- tb-tnx-item -->
-                                        
-                                    </thead>
-                                    <tbody>
-                                        @if ($hotel->amenities->count()==0)
-                                            
-                                            <tr class="tb-tnx-item amenitie0 center">
-                                                <td class="tb-tnx-info center text-center ">
-                                                    NO AMENITIES YET!
-                                                </td>
-                                            </tr><!-- tb-tnx-item -->
-                                        @endif
-                                        @foreach ($hotel->amenities as $amenitie)
-                                            <tr class="tb-tnx-item amenitie{{$amenitie->id}}">
-                                                <td class="tb-tnx-info">
-                                                    <div class="tb-tnx-info">
-                                                        <span class="title">{{ $amenitie->name }}</span>
-                                                    </div>
-                                                </td>
-                                                <td class="tb-tnx-info">
-                                                    <div class="tb-tnx-info">
-                                                        <div class="icon-box style1">{!! $amenitie->icon !!}</div>
-                                                    </div>
-                                                </td>
-                                                <td class="tb-tnx-action">
-                                                    <div class="dropdown">
-                                                        <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
-                                                            <ul class="link-list-plain">
-                                                                <li><a class="delete-modal " data-id="{{ $amenitie->id}}" data-name="{{ $amenitie->name}}" data-icon="{{ $amenitie->icon}}" >Remove</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr><!-- tb-tnx-item -->
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            <div class="card-inner p-0 m-4">
 
                                 
                                 <!-- Modal Form -->
@@ -201,6 +108,33 @@
                                         </div>
                                     </div>
                                 </div>
+                                <form action="{{ route('hotels.amenitieupdate',$hotel->id) }}" class="gy-3" class="is-alter form-validate" method="POST" >
+                                    {{ csrf_field() }}
+                                    <ul class="amenities clearfix style1 row">
+                                        @foreach ($allamenities as $item)
+                                        <li class="col-md-3 col-sm-4">
+                                            <div class="icon-box style1 mb-2">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                    @foreach ($amenities as $amenitie)
+                                                        @if ($amenitie->amenitie_id==$item->id)  checked  @endif
+                                                    @endforeach
+                                                     id="{{ $item->id}}" name="hotelamenties[]" value="{{ $item->id}}">
+                                                    <label class="custom-control-label" for="{{ $item->id}}">{{ $item->name}}</label>
+                                                </div> 
+                                                {!! $item->icon !!}
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+
+                                    
+                                    <button type="submit" class="btn btn-primary">
+                                        <em class="icon ni ni-save"></em>
+                                        <span>Save Amenities</span>
+                                    </button>
+
+                                </form>
 
                             </div><!-- .card-inner -->
                         </div><!-- .card-inner-group -->
@@ -229,100 +163,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
-
-
-    <script>
-        $(document).on('click','.create-modal',function(){
-            $('.form-horizontal').show();
-            $('.modal-title').text('Add Amenitie');
-            $('#close').show();
-            $('#add').show();
-            $('.else').show();
-            $('.delete').hide();
-            $('#amenitie_new').val('');
-            $('#create').modal('show');
-        });
-        //add
-        $("#add").click(function(e){
-            e.preventDefault();
-            $.ajax({
-                type:'POST',
-                url:'addhotelamenitie',
-                data:{
-                    '_token':$('input[name=_token]').val(),
-                    'amenitie_new':$('#amenitie_new').val(),
-                    'hotel_id':$('#hotel_id').val()
-                },
-                success:function(data){
-                    if((data.errors)){
-                        $('.error').removeClass('hidden');
-                        $('.error').text(data.errors);
-                    }
-                    
-                    else {
-                        $('.error').remove();
-                        $('.amenitie0').remove();
-                        $('#table').append("<tr class='tb-tnx-item amenitie" + data.amenitie.id + "'>"+
-                        "<td class='tb-tnx-info'>"+
-                            "<div class='tb-tnx-info'>"+
-                                "<span class='name'>"+ data.amenitie.name + "</span>"+
-                            "</div>"+
-                        "</td>"+
-                        "<td class='tb-tnx-info'>"+
-                            "<div class='tb-tnx-info'>"+
-                                "<div class='icon-box style1'>"+ data.amenitie.icon + "</div>"+
-                            "</div>"+
-                        "</td>"+
-                        "<td class='tb-tnx-action'>"+
-                            "<div class='dropdown'>"+
-                                "<a class='text-soft dropdown-toggle btn btn-icon btn-trigger' data-toggle='dropdown'><em class='icon ni ni-more-h'></em></a>"+
-                                "<div class='dropdown-menu dropdown-menu-right dropdown-menu-xs'>"+
-                                    "<ul class='link-list-plain'>"+
-                                        "<li><a class='delete-modal ' data-id='" + data.amenitie.id + "' data-name='" + data.amenitie.name + "' data-icon='"+ data.amenitie.icon +"' >Remove</a></li>"+
-                                    "</ul>"+
-                                "</div>"+
-                            "</div>"+
-                        "</td>"+
-                        "</tr>");
-                    }
-                },
-            });
-                    
-            $('#amenitie_new').val('');
-            $('#create').modal('toggle');
-        });
-
-
-        $(document).on('click', '.delete-modal', function() {
-            $('.form-horizontal').show();
-            $('.modal-title').text('Delete Amenitie');
-            $('.delete').show();
-            $('.else').hide();
-            $('#id').val($(this).data('id'));
-            $('#create').modal('show');
-        });
-
-        //delete
-        $("#del-amenitie").click(function(e){
-            e.preventDefault();
-            $.ajax({
-                type:'POST',
-                url:'deletehotelamenitie',
-                data:{
-                    '_token':$('input[name=_token]').val(),
-                    'id':$('#id').val()
-                },
-                success:function(data){
-                    $('.amenitie' + data.amenitie).remove();
-                },
-            });
-            
-            $('#create').modal('hide');
-        });
-
-
-    </script> 
 @endsection

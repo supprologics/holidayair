@@ -16,7 +16,8 @@ class CreateFlightDealGalleriesTable extends Migration
         Schema::create('flight_deal_galleries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('file_path');
-            $table->integer('deal_id');
+            $table->unsignedBigInteger('deal_id')->nullable();
+            $table->foreign('deal_id')->references('id')->on('deals')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

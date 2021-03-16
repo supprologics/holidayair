@@ -89,17 +89,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if (!isset($room))
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="form-label" for="rooms">Rooms</label>
+                                            <label class="form-label" for="rooms">Rooms *</label>
                                             <div class="form-control-wrap">
                                                 <input type="text" class="form-control" name="rooms" id="rooms" value="{{ isset($room)?$room->rooms:'1' }}">
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="form-label" for="adults">Adults</label>
+                                            <label class="form-label" for="adults">Adults *</label>
                                             <div class="form-control-wrap">
                                                 <input type="text" class="form-control" name="adults" id="adults" value="{{ isset($room)?$room->adults:'2' }}">
                                             </div>
@@ -110,22 +112,6 @@
                                             <label class="form-label" for="kids">Kids</label>
                                             <div class="form-control-wrap">
                                                 <input type="text" class="form-control" name="kids" id="kids" value="{{ isset($room)?$room->kids:'0' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="checkindate">Not Available on *</label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" name="checkindate" id="checkindate" data-date-format="yyyy-mm-dd" class="form-control date-picker" value="{{ isset($room)?$room->checkindate:'' }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-label" for="checkutdate">Not Available to *</label>
-                                            <div class="form-control-wrap">
-                                                <input type="text" name="checkutdate" id="checkutdate" data-date-format="yyyy-mm-dd" class="form-control date-picker" value="{{ isset($room)?$room->checkutdate:'' }}">
                                             </div>
                                         </div>
                                     </div>

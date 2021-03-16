@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Room;
 use App\Hotel;
+use App\Roomavailable;
 use App\Http\Requests\Rooms\RoomsCreateRequest;
 use App\Http\Requests\Rooms\RoomsUpdateRequest;
 use Illuminate\Support\Facades\Storage;
@@ -53,7 +54,6 @@ class RoomsController extends Controller
             'hotel_id'=>$request->hotel_id,
             'description'=>$request->description,
             'amount'=>$request->amount,
-            'rooms'=>$request->rooms,
             'adults'=>$request->adults,
             'kids'=>$request->kids,
             'checkindate'=>$request->checkindate,
@@ -62,7 +62,15 @@ class RoomsController extends Controller
             'image'=>$image,
         ]);
 
-        session()->flash('success','New hotel added.Update amenities.');
+        for($i=1;$i<=$request->rooms;$i++){
+            $roomavailable=Roomavailable::create([
+                'room_id'=>$room->id,
+                'hotel_id'=>$request->hotel_id,
+            ]);
+        }
+
+        session()->flash('success','New Room Type added.Update rooms availability.');
+        //return view('admin.rooms.available')->with('room',$room);
         return redirect(route('rooms.setrooms',$room->hotel_id));
     }
 
@@ -99,14 +107,13 @@ class RoomsController extends Controller
     public function update(RoomsUpdateRequest $request,Room $room)
     {
 
-        $data=$request->only(['name','description','amount','rooms','adults','kids','checkindate','checkutdate']);
+        $data=$request->only(['name','description','amount','adults','kids','checkindate','checkutdate']);
         if($request->hasFile('image')){
             $image=$request->image->store('rooms');
             Storage::delete($room->image);
             $data['image']=$image;
         }
         $room->update($data);
-
 
         session()->flash('success','Room Updated.');
         return redirect(route('rooms.setrooms',$room->hotel_id));

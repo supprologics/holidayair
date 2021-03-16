@@ -40,7 +40,6 @@
                                     <tr class="nk-tb-item nk-tb-head">
                                         <th class="nk-tb-col"><span class="sub-text">Post Name</span></th>
                                         <th class="nk-tb-col tb-col-mb"><span class="sub-text">Category</span></th>
-                                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Country</span></th>
                                         <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
                                         <th class="nk-tb-col nk-tb-col-tools text-right">
                                         </th>
@@ -56,9 +55,6 @@
                                             <span>{{ $blog->blog_category->name }}</span>
                                         </td>
                                         <td class="nk-tb-col tb-col-md">
-                                            <span>{{ $blog->country->name }}</span>
-                                        </td>
-                                        <td class="nk-tb-col tb-col-md">
                                                 @if ($blog->flag==0)
                                                     <span class="tb-status text-warning">Draft</span>
                                                 @elseif($blog->flag==1)
@@ -68,14 +64,10 @@
                                         <td class="nk-tb-col nk-tb-col-tools">
                                             <ul class="nk-tb-actions gx-1">
                                                 <li class="nk-tb-action-hidden">
-                                                    <a href="" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Publish">
-                                                        <em class="icon ni ni-light-fill"></em>
-                                                    </a>
-                                                </li>
-                                                <li class="nk-tb-action-hidden">
-                                                    <a href="" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Draft">
-                                                        <em class="icon ni ni-list-check"></em>
-                                                    </a>
+                                                    <form action="{{ route('blog.status',$blog->id) }}" method="post">
+                                                        {{ csrf_field() }}
+                                                        <button type="submit" class="btn btn-trigger btn-icon" data-toggle="tooltip" data-placement="top" title="Toggle Status"><em class="icon ni ni-repeat"></em></button>
+                                                    </form>
                                                 </li>
                                                 <li>
                                                     <div class="drodown">

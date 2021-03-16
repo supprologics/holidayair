@@ -16,7 +16,8 @@ class CreateAirlinesTable extends Migration
         Schema::create('airlines', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('code');
-            $table->integer('country_id');
+            $table->unsignedBigInteger('country_id')->nullable();
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->string('logo');
             $table->timestamps();

@@ -31,6 +31,7 @@ class ToursCreateRequest extends FormRequest
             'duration'=>'required',
             'days'=>'required',
             'amount'=>'required',
+
         ];
     }
 }

@@ -21,13 +21,15 @@ class CreateRoomsTable extends Migration
             $table->text('description');
             $table->string('image');
             $table->decimal('amount',10,2);
-            $table->integer('rooms');
             $table->integer('adults');
             $table->integer('kids')->nullable();
             $table->date('checkindate')->nullable();
             $table->date('checkutdate')->nullable();
             $table->integer('bookings')->nullable();
             $table->integer('flag');
+            $table->integer('discount')->nullable();
+            $table->date('discounton')->nullable();
+            $table->date('discountout')->nullable();
             $table->timestamps();
         });
     }

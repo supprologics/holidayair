@@ -15,7 +15,8 @@ class CreateDealRulesTable extends Migration
     {
         Schema::create('deal_rules', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('deal_id');
+            $table->unsignedBigInteger('deal_id')->nullable();
+            $table->foreign('deal_id')->references('id')->on('deals')->onDelete('cascade')->onUpdate('cascade');
             $table->string('title');
             $table->text('description');
             $table->timestamps();

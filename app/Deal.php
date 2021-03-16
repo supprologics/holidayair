@@ -35,4 +35,10 @@ class Deal extends Model
     {
         return $this->hasMany(FlightDealGallery::class);
     }
+
+        
+    public function class_type()
+    {
+        return $this->belongsTo(FlightTicketsCategory::class,'class_type');
+    }
 }

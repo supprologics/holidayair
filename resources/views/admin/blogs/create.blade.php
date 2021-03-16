@@ -15,6 +15,7 @@
                         <div class="nk-block-head-content">
                             <h2 class="nk-block-title page-title">{{ isset($post)?'Update':'Add' }} Post</h2>
                             <div class="nk-block-des text-soft">
+                                <p>* fields are required.</p>
                             </div>
                         </div>
                         
@@ -45,9 +46,9 @@
                                     {{ method_field('PUT') }}
                                 @endif
                                 <div class="row g-4">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">Blog Category</label>
+                                            <label class="form-label">Blog Category *</label>
                                             <div class="form-control-wrap">
                                                 <select class="form-select form-control form-control-lg" name="blog_category_id" id="blog_category_id" data-search="on">
                                                     @foreach ($blogcategories as $category)
@@ -63,45 +64,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label class="form-label">Country</label>
-                                            <div class="form-control-wrap">
-                                                <select class="form-select form-control form-control-lg" name="country_id" id="country_id" data-search="on">
-                                                    @foreach ($countries as $country)
-                                                        <option value="{{ $country->id }}"
-                                                            @if (isset($post))
-                                                                @if ($country->id==$post->country_id)
-                                                                    selected
-                                                                @endif
-                                                            @endif
-                                                        >{{ $country->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label class="form-label">Area</label>
-                                            <div class="form-control-wrap">
-                                                <select class="form-select form-control form-control-lg" name="area_id" id="area_id" data-search="on">
-                                                    @foreach ($areas as $area)
-                                                        <option value="{{ $area->id }}"
-                                                            @if (isset($post))
-                                                                @if ($area->id==$post->area_id)
-                                                                    selected
-                                                                @endif
-                                                            @endif
-                                                        >{{ $area->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="form-label" for="pay-amount-1">Post Name</label>
+                                            <label class="form-label" for="pay-amount-1">Post Name *</label>
                                             <div class="form-control-wrap">
                                                 <input type="text" class="form-control" name="name" id="name" value="{{ isset($post)?$post->name:'' }}">
                                             </div>
@@ -109,7 +74,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="form-label" for="pay-amount-1">Short Description</label>
+                                            <label class="form-label" for="pay-amount-1">Short Description *</label>
                                             <div class="form-control-wrap">
                                                 <textarea class="form-control"  name="description_short" id="description_short" cols="30" rows="2">{{ isset($post)?$post->description_short:'' }}</textarea>
                                             </div>
@@ -117,7 +82,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="form-label" for="pay-amount-1">Post Content</label>
+                                            <label class="form-label" for="pay-amount-1">Post Content *</label>
                                             <div class="form-control-wrap">
                                                 <textarea class="summernote-minimal"  name="description_full" id="description_full" cols="30" rows="10">{{ isset($post)?$post->description_full:'' }}</textarea>
                                             </div>
@@ -134,17 +99,6 @@
 
 
                                     
-                                    <div class="col-lg-2">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" name="flag" id="flag" value='1'
-                                            @if (isset($post))
-                                                @if ($post->flag=='1')
-                                                    checked
-                                                @endif
-                                            @endif>
-                                            <label class="custom-control-label" for="flag">Ready to Published</label>
-                                        </div>
-                                    </div>
 
                             
                                     <div class="col-12">
